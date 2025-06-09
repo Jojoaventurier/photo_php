@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "tailwind:init": "tailwindcss init"
+
   },
   "repository": {
     "type": "git",
@@ -17,8 +17,13 @@
   },
   "homepage": "https://github.com/Jojoaventurier/photo_php#readme",
   "devDependencies": {
+    "autoprefixer": "10.4.21",
     "daisyui": "^5.0.43",
-    "tailwindcss": "^4.1.8"
+    "postcss": "8.5.4",
+    "tailwindcss": "3.4.1"
   },
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.8"
+  }
 }
