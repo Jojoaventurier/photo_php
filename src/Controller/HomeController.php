@@ -9,7 +9,12 @@ class HomeController
     public function index(): string
     {
         return View::render('home', [
-            'title' => 'Welcome to the Photography Site',
+            'title' => 'Marianne Marić',
+            'menuItems' => [
+                ['label' => 'Accueil', 'route' => '/'],
+                ['label' => 'Galerie', 'route' => '/gallery'],
+                ['label' => 'Contact', 'route' => '/contact'],
+            ],
         ]);
     }
 }

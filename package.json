@@ -1,0 +1,24 @@
+{
+  "name": "photo_php",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jojoaventurier/photo_php.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jojoaventurier/photo_php/issues"
+  },
+  "homepage": "https://github.com/Jojoaventurier/photo_php#readme",
+  "devDependencies": {
+    "daisyui": "^5.0.43",
+    "tailwindcss": "^4.1.8"
+  },
+  "description": ""
+}

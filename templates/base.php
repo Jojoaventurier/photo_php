@@ -1,25 +1,12 @@
+<!-- templates/base.php -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" data-theme="cupcake"> <!-- daisyUI theme -->
 <head>
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($title ?? 'Photography Site') ?></title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title><?= isset($title) ? htmlspecialchars($title) : 'Mon site' ?></title>
+    <link rel="stylesheet" href="/assets/css/output.css"> <!-- Compilé avec Tailwind + daisyUI -->
 </head>
 <body>
-    <header>
-        <h1>My Photo Site</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/gallery">Gallery</a>
-        </nav>
-    </header>
-
-    <main>
-        <?= $content ?>
-    </main>
-
-    <footer>
-        &copy; <?= date('Y') ?> Photography by Your Friend
-    </footer>
+    <?= $content ?>
 </body>
 </html>
