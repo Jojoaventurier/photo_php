@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?= isset($title) ? htmlspecialchars($title) : 'Mon site' ?></title>
-    <link rel="stylesheet" href="/assets/css/output.css"> <!-- Compilé avec Tailwind + daisyUI -->
+    <link rel="stylesheet" href="/public/css/output.css"> <!-- Compilé avec Tailwind + daisyUI -->
 </head>
 <body>
     <?= $content ?>
