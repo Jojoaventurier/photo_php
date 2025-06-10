@@ -1,7 +1,8 @@
+// tailwind.config.js
 module.exports = {
   content: [
-    "./public/**/*.php",  // Scan all PHP files
-    // Add other file types if needed (e.g., JS files)
+    './src/templates/*.php',   // Your PHP templates
+    './public/js/*.js',        // JS files where you might use Tailwind classes
   ],
   theme: {
     extend: {},
