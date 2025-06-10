@@ -11,9 +11,9 @@ class HomeController
         return View::render('home', [
             'title' => 'Marianne Marić',
             'menuItems' => [
-                ['label' => 'Accueil', 'route' => '/'],
-                ['label' => 'Galerie', 'route' => '/gallery'],
-                ['label' => 'Contact', 'route' => '/contact'],
+                ['label' => 'Accueil', 'route' => '/photo_php/public/home'],
+                ['label' => 'Galerie', 'route' => '/photo_php/public/gallery'],
+                ['label' => 'Contact', 'route' => '/photo_php/public/contact'],
             ],
         ]);
     }
