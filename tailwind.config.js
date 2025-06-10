@@ -1,11 +1,14 @@
-// tailwind.config.js
 module.exports = {
   content: [
-      './src/templates/**/*.php',
-      './src/Template/**/*.php', // Add uppercase Template folder
-      './public/js/**/*.js',     // Fixed JS path
-    ],
+    "./src/**/*.php",        // All PHP files
+    "./public/**/*.js",       // All JS files
+  ],
   theme: {
+    colors: { // Force include red
+      red: {
+        600: '#dc2626',
+      }
+    },
     extend: {},
   },
   plugins: [],

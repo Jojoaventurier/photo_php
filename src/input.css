@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
-background {
-    color: white;
-    background-color: red;
+@layer utilities {
+  .force-red {
+    color: rgb(220 38 38) !important;
+  }
 }
