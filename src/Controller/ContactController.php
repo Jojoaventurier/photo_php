@@ -4,12 +4,12 @@ namespace App\Controller;
 
 use App\Template\View;
 
-class GalleryController
+class ContactController
 {
     public function index(): string
     {
-        return View::render('gallery', [
-            'title' => 'Galerie',
+        return View::render('contact', [
+            'title' => 'Contact',
         ]);
     }
 }
