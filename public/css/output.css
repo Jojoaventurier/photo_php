@@ -1,6 +1,6 @@
-/* Import Tailwind's base, components, and utilities */
-
-/* ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com */
+/*
+! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
+*/
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -542,4 +542,13 @@ video {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
+}
+
+.static {
+  position: static;
+}
+
+background {
+  color: white;
+  background-color: red;
 }

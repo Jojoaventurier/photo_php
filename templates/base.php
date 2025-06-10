@@ -1,13 +1,13 @@
 <!-- templates/base.php -->
 <!DOCTYPE html>
-<html lang="fr" data-theme="cupcake"> <!-- daisyUI theme -->
+<html lang="fr"> 
 <head>
     <meta charset="UTF-8">
     <title><?= isset($title) ? htmlspecialchars($title) : 'Mon site' ?></title>
-    <link href="/css/output.css" rel="stylesheet"> <!-- Compilé avec Tailwind -->
+    <link rel="stylesheet" href="/photo_php/public/css/output.css"> <!-- Compilé avec Tailwind -->
 
 </head>
 <body>
-    <?= $content ?>
+        <?= $content ?>
 </body>
 </html>

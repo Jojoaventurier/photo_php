@@ -1,9 +1,10 @@
 // tailwind.config.js
 module.exports = {
   content: [
-    './src/templates/*.php',   // Your PHP templates
-    './public/js/*.js',        // JS files where you might use Tailwind classes
-  ],
+      './src/templates/**/*.php',
+      './src/Template/**/*.php', // Add uppercase Template folder
+      './public/js/**/*.js',     // Fixed JS path
+    ],
   theme: {
     extend: {},
   },
