@@ -18,6 +18,10 @@ return [
         'controller' => App\Controller\ArtController::class,
         'method' => 'photography',
     ],
+    '/art/{gallery}' => [
+    'controller' => App\Controller\ArtController::class,
+    'method'     => 'showGallery',   // reçoit $params['gallery']
+    ],
     '/art/direction' => [
         'controller' => App\Controller\ArtController::class,
         'method' => 'direction',
