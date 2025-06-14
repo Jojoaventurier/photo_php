@@ -1,29 +1,38 @@
 <!-- templates/home.php -->
-<div class="w-[1280px] flex items-center justify-center h-screen m-auto">
-    <div class="w-1/2 mr-8 flex flex-col items-center justify-center border bg-red-500 background">
-        <h1 class="text-4xl mb-4 text-red-600">Marianne Marić</h1>
-
-        <ul class="flex flex-col space-y-2">
+<div class="min-h-screen flex flex-col items-center justify-center bg-neutral-50">
+    <!-- Barre de navigation -->
+    <nav class="mb-16 w-full">
+        <ul class="flex justify-center gap-12 text-lg font-medium"
+            x-data="{ openDropdown: false }">
             <?php foreach ($menuItems as $item): ?>
-                <li>
-                    <a href="<?= $item['route'] ?>" class="hover:underline cursor-pointer">
+                <li class="relative group"
+                    @mouseenter="openDropdown = <?= isset($item['children']) ? 'true' : 'false' ?>"
+                    @mouseleave="openDropdown = false">
+                    <a href="<?= $item['route'] ?>"
+                       class="hover:underline">
                         <?= htmlspecialchars($item['label']) ?>
                     </a>
+
+                    <?php if (!empty($item['children'])): ?>
+                        <ul x-show="openDropdown"
+                            x-transition
+                            class="absolute left-0 mt-2 w-48 bg-white rounded shadow-md py-2 space-y-1"
+                            @click.away="openDropdown = false">
+                            <?php foreach ($item['children'] as $child): ?>
+                                <li>
+                                    <a href="<?= $child['route'] ?>"
+                                       class="block px-4 py-2 hover:bg-gray-100">
+                                        <?= htmlspecialchars($child['label']) ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
                 </li>
             <?php endforeach; ?>
         </ul>
-    </div>
-    <div class="p-8">
-        <h1 class="text-red-600">Should be red</h1>
-        <div class="text-red-600 bg-white p-4">Red on white</div>
-    </div>
-    <div class="p-8">
-        <h1 class="text-red-600 bg-white">FORCED RED TEST</h1>
-        <div class="text-green-500">Green test</div>
-    </div>
-    <h1 class="force-red">Test</h1>
+    </nav>
 
-    <div class="h-screen w-1/2 flex items-center border">
-        
-    </div>
+    <!-- Contenu -->
+    <h1 class="text-4xl font-bold text-red-600 mb-4">Marianne Marić</h1>
 </div>

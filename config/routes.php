@@ -10,12 +10,24 @@ return [
         'controller' => App\Controller\HomeController::class,
         'method' => 'index',
     ],
-    '/gallery' => [
-        'controller' => App\Controller\GalleryController::class,
+    '/art' => [
+        'controller' => App\Controller\ArtController::class,
         'method' => 'index',
     ],
-    // '/contact' => [
-    //     'controller' => App\Controller\ContactController::class,
+    '/art/photography' => [
+        'controller' => App\Controller\ArtController::class,
+        'method' => 'photography',
+    ],
+    '/art/direction' => [
+        'controller' => App\Controller\ArtController::class,
+        'method' => 'direction',
+    ],
+    // '/books' => [
+    //     'controller' => App\Controller\BookController::class,
     //     'method' => 'index',
     // ],
+    '/contact' => [
+        'controller' => App\Controller\ContactController::class,
+        'method' => 'index',
+    ],
 ];
