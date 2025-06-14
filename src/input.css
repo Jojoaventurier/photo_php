@@ -2,3 +2,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    /* font-family: 'IBM Plex Sans', sans-serif; */
+    font-family: 'Source Sans 3', sans-serif;
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.02em;
+}

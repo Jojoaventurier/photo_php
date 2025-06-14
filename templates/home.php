@@ -1,7 +1,9 @@
 <!-- templates/home.php -->
 <div class="min-h-screen flex flex-col items-center justify-center bg-neutral-50">
+    
+    <h1 class="text-4xl font-bold text-black mb-4">Marianne Marić</h1>
     <!-- Barre de navigation -->
-    <nav class="mb-16 w-full">
+    <nav class="mb-5 w-full">
         <ul id="main-menu" class="flex justify-center gap-12 text-lg font-medium">
             <?php foreach ($menuItems as $item): ?>
                 <?php $hasChildren = !empty($item['children']); ?>
@@ -11,12 +13,12 @@
                     </a>
 
                     <?php if ($hasChildren): ?>
-                        <ul class="submenu absolute left-0 mt-2 w-48 bg-white rounded shadow-md py-2 space-y-1
+                        <ul class="submenu absolute left-0 mt-2 bg-white rounded shadow-md py-2 space-y-1
                                    opacity-0 pointer-events-none transition-opacity duration-150">
                             <?php foreach ($item['children'] as $child): ?>
                                 <li>
                                     <a href="<?= $child['route'] ?>"
-                                       class="block px-4 py-2 hover:bg-gray-100">
+                                    class="block px-6 hover:bg-gray-100 hover:underline">
                                         <?= htmlspecialchars($child['label']) ?>
                                     </a>
                                 </li>
@@ -29,7 +31,11 @@
     </nav>
 
     <!-- Contenu -->
-    <h1 class="text-4xl font-bold text-red-600 mb-4">Marianne Marić</h1>
+    <div>
+        <img src="/images/sans-titre-4.jpg"
+            alt="Mademoiselle prise en photo de dos, devant un mur de fleurs, noir et blanc, par Marianne Maric"
+            class="w-full max-w-6xl h-auto rounded shadow-lg mb-8">
+    </div>
 </div>
 
 <!-- Sous-menus déroulants sous 'Art' -->
