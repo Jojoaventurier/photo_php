@@ -1,5 +1,4 @@
 <!-- templates/art/index.php -->
-<!-- templates/home.php -->
 <div class="min-h-screen flex flex-col items-center justify-center bg-neutral-50">
     
     <h1 class="text-4xl font-bold text-black mb-4">Marianne Marić</h1>
