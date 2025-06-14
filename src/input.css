@@ -1,9 +1,4 @@
+/* src/input.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer utilities {
-  .force-red {
-    color: rgb(220 38 38) !important;
-  }
-}

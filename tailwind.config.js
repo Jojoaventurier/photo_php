@@ -1,15 +1,16 @@
 module.exports = {
   content: [
-    "./src/**/*.php",        // All PHP files
-    "./public/**/*.js",       // All JS files
+    "./templates/**/*.php",   //  ← toutes tes vues
+    "./*.php",                //  ← index.php ou front‑controller à la racine
+    "./src/**/*.php",         //  ← éventuels composants PHP
+    "./public/**/*.js"        //  ← tes scripts
   ],
   theme: {
-    colors: { // Force include red
-      red: {
-        600: '#dc2626',
+    extend: {                 //  ← utilise extend pour ne PAS écraser la palette
+      colors: {
+        red: { 600: "#dc2626" }
       }
-    },
-    extend: {},
+    }
   },
-  plugins: [],
+  plugins: []
 }

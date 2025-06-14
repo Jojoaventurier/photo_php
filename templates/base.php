@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title><?= isset($title) ? htmlspecialchars($title) : 'Mon site' ?></title>
-    <link rel="stylesheet" href="/photo_php/public/css/output.css"> <!-- Compilé avec Tailwind -->
 
+    <link rel="stylesheet" href="/css/output.css"> <!-- Compilé avec Tailwind -->
+    <!--<link rel="stylesheet" href="/css/output.css">--> <!-- Compilé avec Tailwind -->
+    <!--<script src="https://cdn.tailwindcss.com"></script>-->
 </head>
 <body>
         <?= $content ?>
