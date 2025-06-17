@@ -35,7 +35,7 @@ class ArtController
     public function photography(): string
     {
         $photos = $this->loadGallery('gallery1');   // dossiers: public/images/gallery1
-        return View::render('art/gallery', [
+        return View::render('art/photography', [
             'title'     => 'Photography',
             'menuItems' => $this->getMenu(),
             'photos'    => $photos,
@@ -45,7 +45,7 @@ class ArtController
     public function direction(): string
     {
         $photos = $this->loadGallery('gallery2');   // dossiers: public/images/gallery2
-        return View::render('art/gallery', [
+        return View::render('art/photography', [
             'title'     => 'Art Direction',
             'menuItems' => $this->getMenu(),
             'photos'    => $photos,
