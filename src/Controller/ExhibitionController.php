@@ -1,18 +1,19 @@
 <?php
 
+// src/Controller/ExhibitionController.php
+
 namespace App\Controller;
 
 use App\Template\View;
 
-class HomeController
+class ExhibitionController
 {
-
     public function index(): string
     {
-        return View::render('home', [
-            'title' => 'Marianne Marić',
+        return View::render('exhibitions/index', [
+            'title'     => 'Books & Exhibitions',
             'menuItems' => [
-                ['label' => 'Home', 'route' => '/'],
+                ['label' => 'Home', 'route' => '/home'],
                 [
                     'label' => 'Art',
                     'route' => '/art',
@@ -26,5 +27,4 @@ class HomeController
             ],
         ]);
     }
-
 }

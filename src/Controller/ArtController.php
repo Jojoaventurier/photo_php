@@ -9,7 +9,7 @@ class ArtController
     private function getMenu(): array
     {
         return [
-            ['label' => 'Home', 'route' => '/home'],
+            ['label' => 'Home', 'route' => '/'],
             [
                 'label' => 'Art',
                 'route' => '/art',
@@ -18,7 +18,7 @@ class ArtController
                     ['label' => 'Art Direction',  'route' => '/art/direction'],
                 ],
             ],
-            ['label' => 'Books & Exhibitions', 'route' => '/books'],
+            ['label' => 'Books & Exhibitions', 'route' => '/exhibitions-books'],
             ['label' => 'Contact',             'route' => '/contact'],
         ];
     }
@@ -81,4 +81,40 @@ class ArtController
         'photos'    => $photos,
     ]);
 }
+
+    public function photographyList(): string
+    {
+        // Each gallery folder must exist under /public/images/photography/
+        $galleries = ['gallery1', 'gallery2'];  // You can dynamically scan the folder too
+
+        return View::render('art/photography_list', [
+            'title' => 'Photography Galleries',
+            'menuItems' => $this->getMenu(),
+            'galleries' => $galleries,
+        ]);
+    }
+
+public function showPhotographyGallery(array $params): string
+{
+    $slug = $params['gallery'];
+    $galleryPath = "photography/$slug";
+
+    $photos = $this->loadGallery($galleryPath);
+
+    if (empty($photos)) {
+        return View::render('error/404', [
+            'title' => 'Gallery Not Found',
+            'menuItems' => $this->getMenu(),
+        ]);
+    }
+
+        return View::render('art/photography_gallery', [
+            'title'     => ucfirst($slug),
+            'menuItems' => $this->getMenu(),
+            'photos'    => $photos,
+            'slug'      => $slug,
+            'directory' => "photography/$slug",
+        ]);
+}
+
 }

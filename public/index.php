@@ -3,20 +3,43 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 // Get the requested URL path
 $url = $_GET['url'] ?? '/';
+$url = '/' . trim($url, '/'); // Normalize url with leading slash, no trailing slash
 
 // Load routes
 $routes = require __DIR__ . '/../config/routes.php';
 
-// Find matching route
-if (!isset($routes[$url])) {
+$matchedRoute = null;
+$matchedParams = [];
+
+foreach ($routes as $routePath => $route) {
+    // Convert route path with {param} to regex
+    $paramNames = [];
+    $pattern = preg_replace_callback('/\{(\w+)\}/', function($matches) use (&$paramNames) {
+        $paramNames[] = $matches[1];
+        return '([^/]+)';
+    }, $routePath);
+
+    // Add start/end delimiters and enforce full match
+    $pattern = "#^" . $pattern . "$#";
+
+    if (preg_match($pattern, $url, $matches)) {
+        // Matched route
+        array_shift($matches); // Remove full match
+        // Map params to names
+        $matchedParams = array_combine($paramNames, $matches);
+        $matchedRoute = $route;
+        break;
+    }
+}
+
+if (!$matchedRoute) {
     http_response_code(404);
     echo "404 - Page not found (route not defined)";
     exit;
 }
 
-$route = $routes[$url];
-$controllerClass = $route['controller'];
-$method = $route['method'];
+$controllerClass = $matchedRoute['controller'];
+$method = $matchedRoute['method'];
 
 if (!class_exists($controllerClass)) {
     http_response_code(500);
@@ -32,4 +55,5 @@ if (!method_exists($controller, $method)) {
     exit;
 }
 
-echo $controller->$method();
+// Call method with parameters (if any)
+echo call_user_func_array([$controller, $method], $matchedParams);
