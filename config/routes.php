@@ -18,6 +18,17 @@ return [
         'controller' => App\Controller\ArtController::class,
         'method' => 'showPhotographyGallery',
     ],
+
+    // ✅ NEW ALIASES
+    '/photography' => [
+        'controller' => App\Controller\ArtController::class,
+        'method' => 'photographyList',
+    ],
+    '/photography/{gallery}' => [
+        'controller' => App\Controller\ArtController::class,
+        'method' => 'showPhotographyGallery',
+    ],
+
     '/art/direction' => [
         'controller' => App\Controller\ArtController::class,
         'method' => 'direction',
@@ -26,8 +37,8 @@ return [
         'controller' => App\Controller\ContactController::class,
         'method' => 'index',
     ],
-    '/books' => [
-        'controller' => App\Controller\BookController::class,
+    '/exhibitions-books' => [
+        'controller' => App\Controller\ExhibitionController::class,
         'method' => 'index',
     ],
 ];

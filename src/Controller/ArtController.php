@@ -9,15 +9,21 @@ class ArtController
     private function getMenu(): array
     {
         return [
-            ['label' => 'Home', 'route' => '/'],
+            ['label' => 'Home', 'route' => '/home'],
+            ['label' => 'Photography', 'route' => '/photography'], // Top-level now
+
+            // ❌ Temporarily hidden
+            /*
             [
                 'label' => 'Art',
                 'route' => '/art',
                 'children' => [
-                    ['label' => 'Photography',    'route' => '/art/photography'],
-                    ['label' => 'Art Direction',  'route' => '/art/direction'],
+                    ['label' => 'Photography (in Art)', 'route' => '/art/photography'],
+                    ['label' => 'Art Direction',        'route' => '/art/direction'],
                 ],
             ],
+            */
+
             ['label' => 'Books & Exhibitions', 'route' => '/exhibitions-books'],
             ['label' => 'Contact',             'route' => '/contact'],
         ];
@@ -94,27 +100,26 @@ class ArtController
         ]);
     }
 
-public function showPhotographyGallery(array $params): string
-{
-    $slug = $params['gallery'];
-    $galleryPath = "photography/$slug";
+    public function showPhotographyGallery(string $gallery): string
+    {
+        $galleryPath = "photography/$gallery";
 
-    $photos = $this->loadGallery($galleryPath);
+        $photos = $this->loadGallery($galleryPath);
 
-    if (empty($photos)) {
-        return View::render('error/404', [
-            'title' => 'Gallery Not Found',
-            'menuItems' => $this->getMenu(),
-        ]);
-    }
+        if (empty($photos)) {
+            return View::render('error/404', [
+                'title' => 'Gallery Not Found',
+                'menuItems' => $this->getMenu(),
+            ]);
+        }
 
         return View::render('art/photography_gallery', [
-            'title'     => ucfirst($slug),
+            'title'     => ucfirst($gallery),
             'menuItems' => $this->getMenu(),
             'photos'    => $photos,
-            'slug'      => $slug,
-            'directory' => "photography/$slug",
+            'slug'      => $gallery,
+            'directory' => $galleryPath,
         ]);
-}
+    }
 
 }

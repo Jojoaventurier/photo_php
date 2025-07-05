@@ -12,3 +12,7 @@ h1 {
     font-family: 'Cormorant Garamond', serif;
     letter-spacing: 0.02em;
 }
+
+.hidden {
+    display: hidden;
+}

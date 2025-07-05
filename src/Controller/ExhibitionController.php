@@ -12,19 +12,20 @@ class ExhibitionController
     {
         return View::render('exhibitions/index', [
             'title'     => 'Books & Exhibitions',
-            'menuItems' => [
-                ['label' => 'Home', 'route' => '/home'],
-                [
-                    'label' => 'Art',
-                    'route' => '/art',
-                    'children' => [
-                        ['label' => 'Photography', 'route' => '/art/photography'],
-                        ['label' => 'Art Direction', 'route' => '/art/direction'],
-                    ],
-                ],
+            'menuItems' => 
+            // [
+            //     ['label' => 'Home', 'route' => '/home'],
+            //     [
+            //         'label' => 'Art',
+            //         'route' => '/art',
+            //         'children' => [
+            //             ['label' => 'Photography', 'route' => '/art/photography'],
+            //             ['label' => 'Art Direction', 'route' => '/art/direction'],
+            //         ],
+                // ],
                 ['label' => 'Books & Exhibitions', 'route' => '/exhibitions-books'],
                 ['label' => 'Contact', 'route' => '/contact'],
-            ],
+            // ],
         ]);
     }
 }

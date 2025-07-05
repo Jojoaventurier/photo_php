@@ -23,9 +23,7 @@ foreach ($routes as $routePath => $route) {
     $pattern = "#^" . $pattern . "$#";
 
     if (preg_match($pattern, $url, $matches)) {
-        // Matched route
         array_shift($matches); // Remove full match
-        // Map params to names
         $matchedParams = array_combine($paramNames, $matches);
         $matchedRoute = $route;
         break;
@@ -55,5 +53,5 @@ if (!method_exists($controller, $method)) {
     exit;
 }
 
-// Call method with parameters (if any)
+// ✅ Best practice: method with typed, named parameters
 echo call_user_func_array([$controller, $method], $matchedParams);
