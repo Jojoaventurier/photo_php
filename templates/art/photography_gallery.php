@@ -3,109 +3,128 @@
 <?php else: ?>
     <!-- your main image + arrows -->
 <?php endif; ?>
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+<div class="min-h-screen flex flex-col items-center bg-neutral-50">  
+    <div class="inline-flex max-w-[80%] items-center mb-6 mt-6">
+        <h1 class="text-4xl font-bold text-black">Marianne Marić</h1>
 
-<div class="min-h-screen flex flex-col items-center justify-center bg-neutral-50">  
-    <h1 class="text-4xl font-bold text-black mb-4">Marianne Marić</h1>
+        <!-- Barre de navigation -->
+        <nav class="w-full">
+            <ul id="main-menu" class="flex justify-center gap-12 text-lg font-extralight">
+                <?php foreach ($menuItems as $item): ?>
+                    <?php $hasChildren = !empty($item['children']); ?>
+                    <li class="relative group <?= $hasChildren ? 'has-dropdown' : '' ?>">
+                        <a href="<?= $item['route'] ?>" class="hover:underline">
+                            <?= htmlspecialchars($item['label']) ?>
+                        </a>
 
-    <!-- Barre de navigation -->
-    <nav class="mb-5 w-full">
-        <ul id="main-menu" class="flex justify-center gap-12 text-lg font-medium">
-            <?php foreach ($menuItems as $item): ?>
-                <?php $hasChildren = !empty($item['children']); ?>
-                <li class="relative group <?= $hasChildren ? 'has-dropdown' : '' ?>">
-                    <a href="<?= $item['route'] ?>" class="hover:underline">
-                        <?= htmlspecialchars($item['label']) ?>
-                    </a>
-
-                    <?php if ($hasChildren): ?>
-                        <ul class="submenu absolute left-0 mt-2 bg-white rounded shadow-md py-2 space-y-1
-                                   opacity-0 pointer-events-none transition-opacity duration-150">
-                            <?php foreach ($item['children'] as $child): ?>
-                                <li>
-                                    <a href="<?= $child['route'] ?>"
-                                    class="block px-6 hover:bg-gray-100 hover:underline">
-                                        <?= htmlspecialchars($child['label']) ?>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </nav>
-
-    <div class="max-w-6xl mx-auto px-4 py-4 relative"> <!-- relative pour positionner flèches -->
-        <!-- Image centrale avec flèches -->
-        <div class="mb-12 relative">
-            <!-- Flèche gauche -->
-            <button id="prevBtn"
-                class="absolute top-1/2 left-2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-2 shadow z-20">
-                &#8592;
-            </button>
-
-            <img id="main-image"
-                src="/images/<?= $directory ?>/<?= basename($photos[0]) ?>"
-                alt="Image principale"
-                class="w-full max-h-[80vh] object-contain rounded shadow-lg transition duration-300 sticky top-0 z-10 bg-white">
-
-            <!-- Flèche droite -->
-            <button id="nextBtn"
-                class="absolute top-1/2 right-2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-2 shadow z-20">
-                &#8594;
-            </button>
-        </div>
-
-        <!-- Miniatures carrées -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <?php foreach ($photos as $index => $photo): ?>
-                <img src="/images/<?= $directory ?>/<?= basename($photo) ?>"
-                    alt="Miniature <?= $index + 1 ?>"
-                    class="thumbnail cursor-pointer aspect-square object-cover rounded shadow hover:opacity-80 transition duration-200 border-2 border-transparent <?= $index === 0 ? 'border-red-500' : '' ?>"
-                    data-index="<?= $index ?>">
-            <?php endforeach; ?>
-        </div>
+                        <?php if ($hasChildren): ?>
+                            <ul class="submenu absolute left-0 mt-2 bg-white shadow-md py-2 space-y-1
+                                    opacity-0 pointer-events-none transition-opacity duration-150">
+                                <?php foreach ($item['children'] as $child): ?>
+                                    <li>
+                                        <a href="<?= $child['route'] ?>"
+                                        class="block px-6 hover:bg-gray-100 hover:underline">
+                                            <?= htmlspecialchars($child['label']) ?>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </nav>
     </div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const photos = <?= json_encode(array_map('basename', $photos)) ?>;
-        const mainImage = document.getElementById('main-image');
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const directory = <?= json_encode($directory) ?>;
+<div class="max-w-6xl mx-auto px-4 py-4 space-y-8">
+    <!-- Thumbnails (Grid) -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+        <?php foreach ($photos as $index => $photo): ?>
+            <a href="#photo-<?= $index ?>" class="block">
+                <img
+                    src="/images/<?= $directory ?>/<?= basename($photo) ?>"
+                    alt="Miniature <?= $index + 1 ?>"
+                    class="cursor-pointer aspect-square object-cover shadow hover:opacity-80 transition duration-200 border-2 border-transparent hover:border-red-500">
+            </a>
+        <?php endforeach; ?>
+    </div>
 
-        let currentIndex = 0;
+    <!-- Big Images -->
+    <div class="space-y-16">
+        <?php foreach ($photos as $index => $photo): ?>
+            <img
+                id="photo-<?= $index ?>"
+                src="/images/<?= $directory ?>/<?= basename($photo) ?>"
+                alt="Image <?= $index + 1 ?>"
+                class="w-full max-h-[85vh] object-contain shadow-lg bg-white scroll-mt-24 cursor-zoom-in"
+                onclick="openFullscreen(<?= $index ?>)">
+        <?php endforeach; ?>
+    </div>
+</div>
 
-        function updateMainImage(index) {
+<!-- Fullscreen Modal -->
+<div id="fullscreenModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center cursor-zoom-out" onclick="closeFullscreen()">
+    <!-- Close Button -->
+    <button onclick="closeFullscreen(); event.stopPropagation();" class="absolute top-4 right-4 text-white text-3xl font-light hover:text-red-500 z-50">
+        &times;
+    </button>
+
+    <!-- Arrows -->
+    <button onclick="event.stopPropagation(); showImage(currentIndex - 1)" class="absolute left-4 text-white text-4xl hover:text-red-500 z-50">&#8592;</button>
+    <button onclick="event.stopPropagation(); showImage(currentIndex + 1)" class="absolute right-4 text-white text-4xl hover:text-red-500 z-50">&#8594;</button>
+
+    <!-- Image -->
+    <img id="fullscreenImage" src="" alt="Fullscreen Image" class="max-w-[90vw] max-h-[90vh] object-contain shadow-xl z-40" />
+</div>
+
+<script>
+    const images = <?= json_encode(array_values($photos)) ?>;
+    const dir = <?= json_encode($directory) ?>;
+    let currentIndex = 0;
+
+    function openFullscreen(index) {
+        currentIndex = index;
+        const modal = document.getElementById('fullscreenModal');
+        const img = document.getElementById('fullscreenImage');
+        img.src = `/images/${dir}/${basename(images[index])}`;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeFullscreen() {
+        document.getElementById('fullscreenModal').classList.add('hidden');
+        document.getElementById('fullscreenImage').src = '';
+        document.body.style.overflow = '';
+    }
+
+    function basename(path) {
+        return path.split('/').pop();
+    }
+
+    function showImage(index) {
+        if (index >= 0 && index < images.length) {
             currentIndex = index;
-            mainImage.src = `/images/${directory}/${photos[currentIndex]}`;
-            thumbnails.forEach(t => t.classList.remove('border-red-500'));
-            thumbnails[currentIndex].classList.add('border-red-500');
+            const img = document.getElementById('fullscreenImage');
+            img.src = `/images/${dir}/${basename(images[currentIndex])}`;
         }
+    }
 
-        thumbnails.forEach(thumb => {
-            thumb.addEventListener('click', function () {
-                updateMainImage(parseInt(this.dataset.index));
+    document.addEventListener('keydown', (e) => {
+        const modalVisible = !document.getElementById('fullscreenModal').classList.contains('hidden');
+        if (!modalVisible) return;
 
-                const y = mainImage.getBoundingClientRect().top + window.pageYOffset;
-                const offset = 30;
-                window.scrollTo({ top: y - offset, behavior: 'smooth' });
-            });
-        });
-
-        prevBtn.addEventListener('click', () => {
-            let newIndex = currentIndex - 1;
-            if (newIndex < 0) newIndex = photos.length - 1;
-            updateMainImage(newIndex);
-        });
-
-        nextBtn.addEventListener('click', () => {
-            let newIndex = currentIndex + 1;
-            if (newIndex >= photos.length) newIndex = 0;
-            updateMainImage(newIndex);
-        });
+        if (e.key === 'Escape') {
+            closeFullscreen();
+        } else if (e.key === 'ArrowLeft') {
+            showImage(currentIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+            showImage(currentIndex + 1);
+        }
     });
-    </script>
+</script>
 </div>
