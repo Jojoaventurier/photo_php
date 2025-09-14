@@ -1,14 +1,10 @@
 <?php
-
-// src/Controller/ExhibitionController.php
-
+// src/Controller/ArtDirectionController.php
 namespace App\Controller;
-
 use App\Template\View;
 
-class ContactController
+class ArtDirectionController
 {
-
     /* --------  MENU COMMUN  -------- */
     private function getMenu(): array
     {
@@ -23,8 +19,8 @@ class ContactController
 
     public function index(): string
     {
-        return View::render('contact/contact', [
-            'title'     => 'Contact',
+        return View::render('art-direction/index', [
+            'title' => 'Art Direction - Marianne Marić',
             'menuItems' => $this->getMenu(),
         ]);
     }

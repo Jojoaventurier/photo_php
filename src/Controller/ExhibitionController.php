@@ -13,22 +13,10 @@ class ExhibitionController
     {
         return [
             ['label' => 'Home', 'route' => '/home'],
-            ['label' => 'Photography', 'route' => '/photography'], // Top-level now
-
-            // ❌ Temporarily hidden
-            /*
-            [
-                'label' => 'Art',
-                'route' => '/art',
-                'children' => [
-                    ['label' => 'Photography (in Art)', 'route' => '/art/photography'],
-                    ['label' => 'Art Direction',        'route' => '/art/direction'],
-                ],
-            ],
-            */
-
+            ['label' => 'Photography', 'route' => '/photography'],
+            ['label' => 'Art Direction', 'route' => '/art-direction'],
             ['label' => 'Books & Exhibitions', 'route' => '/exhibitions-books'],
-            ['label' => 'Contact',             'route' => '/contact'],
+            ['label' => 'Contact', 'route' => '/contact'],
         ];
     }
 

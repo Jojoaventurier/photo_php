@@ -1,3 +1,4 @@
+
 <div class="min-h-screen flex flex-col items-center bg-neutral-50">  
     <div class="inline-flex max-w-[80%] items-center mb-6 mt-6">
         <h1 class="text-4xl font-bold text-black">Marianne Marić</h1>
@@ -30,8 +31,5 @@
             </ul>
         </nav>
     </div>
-<div class="m-auto">
-    <h2 class=" font-light">contact@mariannemaric.com</h2>
-</div>
-
+    <h1>Coucou Marianne</h1>
 </div>

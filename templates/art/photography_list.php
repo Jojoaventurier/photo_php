@@ -1,7 +1,17 @@
+<?php
+// Array hardcodé des titres de galleries (à ajouter en haut de votre fichier)
+$galleryTitles = [
+    'gallery1' => "Rose Sarajevo",
+    'gallery2' => "Les Statues Meurent Aussi", 
+    'gallery3' => "blabla",
+    'gallery4' => "okidok",
+    // Ajoutez vos titres selon les noms de vos dossiers de galleries
+];
+?>
+
 <div class="min-h-screen flex flex-col items-center bg-neutral-50">  
     <div class="inline-flex max-w-[80%] items-center mb-6 mt-6">
         <h1 class="text-4xl font-bold text-black">Marianne Marić</h1>
-
         <!-- Barre de navigation -->
         <nav class="w-full">
             <ul id="main-menu" class="flex justify-center gap-12 text-lg font-extralight">
@@ -11,7 +21,6 @@
                         <a href="<?= $item['route'] ?>" class="hover:underline">
                             <?= htmlspecialchars($item['label']) ?>
                         </a>
-
                         <?php if ($hasChildren): ?>
                             <ul class="submenu absolute left-0 mt-2 bg-white rounded shadow-md py-2 space-y-1
                                     opacity-0 pointer-events-none transition-opacity duration-150">
@@ -30,10 +39,7 @@
             </ul>
         </nav>
     </div>
-
-    <h2 class="text-2xl my-6 font-light underline">Photography</h2>
-
-
+    <h2 class="text-2xl my-8 font-light underline">Photography</h2>
 <div class="w-full max-w-[80%] grid grid-cols-1">
     <?php foreach ($galleries as $gallery): ?>
         <?php
@@ -43,11 +49,14 @@
                 return is_file("$path/$f") && in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
             }));
             $cover = $files[0] ?? null;
+            
+            // Récupération du titre de la gallery
+            $galleryTitle = $galleryTitles[$gallery] ?? ucfirst(str_replace(['_', '-'], ' ', $gallery));
         ?>
         <div class="inline-flex items-center justify-center mb-6">
             <a href="/art/photography/<?= urlencode($gallery) ?>" class="block group mr-8">
                 <?php if ($cover): ?>
-                    <div class="w-[32rem] h-96 bg-white flex items-center justify-center overflow-hidden">
+                    <div class="w-[32rem] h-96 bg-neutral-50 flex items-center justify-center overflow-hidden">
                         <img src="/images/photography/<?= $gallery ?>/<?= urlencode($cover) ?>"
                             alt=""
                             class="w-full h-full object-contain shadow group-hover:opacity-80 transition" />
@@ -58,10 +67,10 @@
                     </div>
                 <?php endif; ?>
             </a>
-            <div class="text-center font-light">
-                <p>"Titre gallerie"</p>
-            </div>
         </div>
+                    <div class="text-center font-light mb-12">
+                <p><?= htmlspecialchars($galleryTitle) ?></p>
+            </div>
     <?php endforeach; ?>
 </div>
 </div>

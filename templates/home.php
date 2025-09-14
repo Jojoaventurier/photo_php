@@ -33,7 +33,7 @@
     </div>
 
     <!-- Contenu -->
-    <div>
+    <div class="m-auto">
         <img src="/images/sans-titre-4.jpg"
             alt="Mademoiselle prise en photo de dos, devant un mur de fleurs, noir et blanc, par Marianne Maric"
             class="w-full max-w-6xl h-auto rounded shadow-lg mb-8">

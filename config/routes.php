@@ -1,6 +1,5 @@
 <?php
 // config/routes.php
-
 return [
     '/home' => [
         'controller' => App\Controller\HomeController::class,
@@ -18,7 +17,6 @@ return [
         'controller' => App\Controller\ArtController::class,
         'method' => 'showPhotographyGallery',
     ],
-
     '/photography' => [
         'controller' => App\Controller\ArtController::class,
         'method' => 'photographyList',
@@ -27,10 +25,13 @@ return [
         'controller' => App\Controller\ArtController::class,
         'method' => 'showPhotographyGallery',
     ],
-
     '/art/direction' => [
         'controller' => App\Controller\ArtController::class,
         'method' => 'direction',
+    ],
+    '/art-direction' => [
+        'controller' => App\Controller\ArtDirectionController::class,
+        'method' => 'index',
     ],
     '/contact' => [
         'controller' => App\Controller\ContactController::class,

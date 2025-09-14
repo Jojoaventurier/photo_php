@@ -26,7 +26,8 @@ public function index(): string
             ],
             */
 
-            ['label' => 'Photography', 'route' => '/photography'], // ✅ new top-level item
+            ['label' => 'Photography', 'route' => '/photography'], 
+            ['label' => 'Art Direction', 'route' => '/'], 
             ['label' => 'Books & Exhibitions', 'route' => '/exhibitions-books'],
             ['label' => 'Contact', 'route' => '/contact'],
         ],
