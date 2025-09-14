@@ -8,24 +8,35 @@ use App\Template\View;
 
 class ExhibitionController
 {
+    /* --------  MENU COMMUN  -------- */
+    private function getMenu(): array
+    {
+        return [
+            ['label' => 'Home', 'route' => '/home'],
+            ['label' => 'Photography', 'route' => '/photography'], // Top-level now
+
+            // ❌ Temporarily hidden
+            /*
+            [
+                'label' => 'Art',
+                'route' => '/art',
+                'children' => [
+                    ['label' => 'Photography (in Art)', 'route' => '/art/photography'],
+                    ['label' => 'Art Direction',        'route' => '/art/direction'],
+                ],
+            ],
+            */
+
+            ['label' => 'Books & Exhibitions', 'route' => '/exhibitions-books'],
+            ['label' => 'Contact',             'route' => '/contact'],
+        ];
+    }
+
     public function index(): string
     {
-        return View::render('exhibitions/index', [
+        return View::render('exhibitions/books_exhibitions', [
             'title'     => 'Books & Exhibitions',
-            'menuItems' => 
-            // [
-            //     ['label' => 'Home', 'route' => '/home'],
-            //     [
-            //         'label' => 'Art',
-            //         'route' => '/art',
-            //         'children' => [
-            //             ['label' => 'Photography', 'route' => '/art/photography'],
-            //             ['label' => 'Art Direction', 'route' => '/art/direction'],
-            //         ],
-                // ],
-                ['label' => 'Books & Exhibitions', 'route' => '/exhibitions-books'],
-                ['label' => 'Contact', 'route' => '/contact'],
-            // ],
+            'menuItems' => $this->getMenu(),
         ]);
     }
 }

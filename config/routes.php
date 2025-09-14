@@ -19,7 +19,6 @@ return [
         'method' => 'showPhotographyGallery',
     ],
 
-    // ✅ NEW ALIASES
     '/photography' => [
         'controller' => App\Controller\ArtController::class,
         'method' => 'photographyList',

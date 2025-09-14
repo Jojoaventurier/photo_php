@@ -30,13 +30,7 @@ class ArtController
     }
 
     /* --------  PAGES  -------- */
-    public function index(): string
-    {
-        return View::render('art/index', [
-            'title'     => 'Art',
-            'menuItems' => $this->getMenu(),
-        ]);
-    }
+
 
     public function photography(): string
     {
