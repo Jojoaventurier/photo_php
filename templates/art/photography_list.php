@@ -3,8 +3,6 @@
 $galleryTitles = [
     'gallery1' => "Rose Sarajevo",
     'gallery2' => "Les Statues Meurent Aussi", 
-    'gallery3' => "blabla",
-    'gallery4' => "okidok",
     // Ajoutez vos titres selon les noms de vos dossiers de galleries
 ];
 ?>
