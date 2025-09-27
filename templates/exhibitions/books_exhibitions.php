@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/config.php'; ?>
+<?php require_once __DIR__ . '../../../config.php'; ?>
 <div class="min-h-screen flex flex-col items-center bg-neutral-50">  
     <div class="inline-flex max-w-[80%] items-center mb-6 mt-6">
         <h1 class="text-4xl font-bold text-black">Marianne Marić</h1>

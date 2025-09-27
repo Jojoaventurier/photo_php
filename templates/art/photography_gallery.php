@@ -1,8 +1,7 @@
-<?php
-require_once __DIR__ . '/config.php';
+<?php require_once __DIR__ . '../../../config.php'; 
 
 $currentUri = rtrim($_SERVER['REQUEST_URI'], '/');
-$isPhotographyPage = preg_match('#^/(art/)?photography#', $currentUri);
+$isPhotographyPage = preg_match('#^/?photography#', $currentUri);
 ?>
 
 <div class="min-h-screen flex flex-col items-center bg-neutral-50">
