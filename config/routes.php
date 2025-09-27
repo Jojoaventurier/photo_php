@@ -1,22 +1,17 @@
 <?php
-// config/routes.php
+require_once __DIR__ . '/config.php'; 
+
 return [
+    // Homepage
+    '/' => [
+        'controller' => App\Controller\HomeController::class,
+        'method' => 'index',
+    ],
     '/home' => [
         'controller' => App\Controller\HomeController::class,
         'method' => 'index',
     ],
-    '/art' => [
-        'controller' => App\Controller\ArtController::class,
-        'method' => 'index',
-    ],
-    '/art/photography' => [
-        'controller' => App\Controller\ArtController::class,
-        'method' => 'photographyList',
-    ],
-    '/art/photography/{gallery}' => [
-        'controller' => App\Controller\ArtController::class,
-        'method' => 'showPhotographyGallery',
-    ],
+
     '/photography' => [
         'controller' => App\Controller\ArtController::class,
         'method' => 'photographyList',
@@ -25,14 +20,14 @@ return [
         'controller' => App\Controller\ArtController::class,
         'method' => 'showPhotographyGallery',
     ],
-    '/art/direction' => [
-        'controller' => App\Controller\ArtController::class,
-        'method' => 'direction',
-    ],
+
+    // Art Direction controller (if different from ArtController)
     '/art-direction' => [
         'controller' => App\Controller\ArtDirectionController::class,
         'method' => 'index',
     ],
+
+    // Other pages
     '/contact' => [
         'controller' => App\Controller\ContactController::class,
         'method' => 'index',

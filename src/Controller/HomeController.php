@@ -6,34 +6,25 @@ use App\Template\View;
 
 class HomeController
 {
+    public function index(): string
+    {
+        return View::render('home', [
+            'title' => 'Marianne Marić',
+            'menuItems' => $this->getMenu(),
+        ]);
+    }
 
-public function index(): string
-{
-    return View::render('home', [
-        'title' => 'Marianne Marić',
-        'menuItems' => [
-            ['label' => 'Home', 'route' => '/home'],
-
-            // ❌ Temporarily hidden
-            /*
-            [
-                'label' => 'Art',
-                'route' => '/art',
-                'children' => [
-                    ['label' => 'Photography', 'route' => '/art/photography'],
-                    ['label' => 'Art Direction', 'route' => '/art/direction'],
-                ],
-            ],
-            */
-
-            ['label' => 'Photography', 'route' => '/photography'], 
-            ['label' => 'Art Direction', 'route' => '/'], 
-            ['label' => 'Books & Exhibitions', 'route' => '/exhibitions-books'],
+    /**
+     * Build the navigation menu
+     */
+    private function getMenu(): array
+    {
+        return [
+            ['label' => 'Home', 'route' => '/'], // ✅ use "/" for homepage
+            ['label' => 'Photography', 'route' => '/photography'],
+            ['label' => 'Art Direction', 'route' => '/art-direction'],
+            ['label' => 'Exhibitions & Books', 'route' => '/exhibitions-books'],
             ['label' => 'Contact', 'route' => '/contact'],
-        ],
-    ]);
-}
-
-    
-
+        ];
+    }
 }

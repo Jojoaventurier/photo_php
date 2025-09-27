@@ -1,9 +1,10 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/config.php'; 
 
-// Get the requested URL path
-$url = $_GET['url'] ?? '/';
-$url = '/' . trim($url, '/'); // Normalize url with leading slash, no trailing slash
+// Get the requested URL path from htaccess
+$url = $_GET['url'] ?? '';
+$url = '/' . trim($url, '/'); // Normalize: always start with "/", no trailing "/"
 
 // Load routes
 $routes = require __DIR__ . '/../config/routes.php';
@@ -12,19 +13,19 @@ $matchedRoute = null;
 $matchedParams = [];
 
 foreach ($routes as $routePath => $route) {
-    // Convert route path with {param} to regex
+    // Convert {param} placeholders to regex
     $paramNames = [];
     $pattern = preg_replace_callback('/\{(\w+)\}/', function($matches) use (&$paramNames) {
         $paramNames[] = $matches[1];
         return '([^/]+)';
     }, $routePath);
 
-    // Add start/end delimiters and enforce full match
+    // Match entire URL
     $pattern = "#^" . $pattern . "$#";
 
     if (preg_match($pattern, $url, $matches)) {
         array_shift($matches); // Remove full match
-        $matchedParams = array_combine($paramNames, $matches);
+        $matchedParams = $paramNames ? array_combine($paramNames, $matches) : [];
         $matchedRoute = $route;
         break;
     }
@@ -53,5 +54,5 @@ if (!method_exists($controller, $method)) {
     exit;
 }
 
-// ✅ Best practice: method with typed, named parameters
+// Call controller method with matched params
 echo call_user_func_array([$controller, $method], $matchedParams);

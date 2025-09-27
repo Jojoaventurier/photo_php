@@ -1,4 +1,5 @@
 <!-- templates/home.php -->
+<?php require_once __DIR__ . '/config.php'; ?>
 <div class="min-h-screen flex flex-col items-center bg-neutral-50">  
     <div class="inline-flex max-w-[80%] items-center mb-6 mt-6">
         <h1 class="text-4xl font-bold text-black">Marianne Marić</h1>
@@ -7,9 +8,13 @@
         <nav class="w-full">
             <ul id="main-menu" class="flex justify-center gap-12 text-lg font-extralight">
                 <?php foreach ($menuItems as $item): ?>
-                    <?php $hasChildren = !empty($item['children']); ?>
+                    <?php 
+                        $hasChildren = !empty($item['children']); 
+                        $isActive = ($_SERVER['REQUEST_URI'] === $item['route']); 
+                    ?>
                     <li class="relative group <?= $hasChildren ? 'has-dropdown' : '' ?>">
-                        <a href="<?= $item['route'] ?>" class="hover:underline">
+                        <a href="<?= $item['route'] ?>"
+                        class="hover:underline <?= $isActive ? 'underline' : '' ?>">
                             <?= htmlspecialchars($item['label']) ?>
                         </a>
 
@@ -17,9 +22,10 @@
                             <ul class="submenu absolute left-0 mt-2 bg-white rounded shadow-md py-2 space-y-1
                                     opacity-0 pointer-events-none transition-opacity duration-150">
                                 <?php foreach ($item['children'] as $child): ?>
+                                    <?php $isChildActive = ($_SERVER['REQUEST_URI'] === $child['route']); ?>
                                     <li>
                                         <a href="<?= $child['route'] ?>"
-                                        class="block px-6 hover:bg-gray-100 hover:underline">
+                                        class="block px-6 hover:bg-gray-100 hover:underline <?= $isChildActive ? 'underline' : '' ?>">
                                             <?= htmlspecialchars($child['label']) ?>
                                         </a>
                                     </li>
@@ -32,12 +38,11 @@
         </nav>
     </div>
 
-    <!-- Contenu -->
-    <div class="m-auto">
-        <img src="/images/homepage.jpg"
-            alt="Jeune femme prise en photo de dos, devant un mur de fleurs, noir et blanc, par Marianne Maric"
-            class="w-full max-w-6xl h-auto rounded shadow-lg mb-8">
-    </div>
+<!-- Contenu -->
+<div class="m-auto">
+    <img src="/assets/images/homepage.jpg"
+        alt="Jeune femme prise en photo de dos, devant un mur de fleurs, noir et blanc, par Marianne Maric"
+        class="w-full max-w-6xl h-auto rounded shadow-lg mb-8">
 </div>
 
 <!-- Sous-menus déroulants sous 'Art' -->

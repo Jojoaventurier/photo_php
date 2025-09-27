@@ -6,16 +6,16 @@ use App\Template\View;
 class ArtDirectionController
 {
     /* --------  MENU COMMUN  -------- */
-    private function getMenu(): array
-    {
-        return [
-            ['label' => 'Home', 'route' => '/home'],
-            ['label' => 'Photography', 'route' => '/photography'],
-            ['label' => 'Art Direction', 'route' => '/art-direction'],
-            ['label' => 'Books & Exhibitions', 'route' => '/exhibitions-books'],
-            ['label' => 'Contact', 'route' => '/contact'],
-        ];
-    }
+private function getMenu(): array
+{
+    return [
+        ['label' => 'Home', 'route' => '/'],
+        ['label' => 'Photography', 'route' => '/photography'],
+        ['label' => 'Art Direction', 'route' => '/art-direction'],
+        ['label' => 'Exhibitions & Books', 'route' => '/exhibitions-books'],
+        ['label' => 'Contact', 'route' => '/contact'],
+    ];
+}
 
     public function index(): string
     {
