@@ -20,7 +20,7 @@ class HomeController
     private function getMenu(): array
     {
         return [
-            ['label' => 'Home', 'route' => '/'], // ✅ use "/" for homepage
+            ['label' => 'Home', 'route' => '/home'], // ✅ use "/" for homepage
             ['label' => 'Photography', 'route' => '/photography'],
             ['label' => 'Art Direction', 'route' => '/art-direction'],
             ['label' => 'Exhibitions & Books', 'route' => '/exhibitions-books'],

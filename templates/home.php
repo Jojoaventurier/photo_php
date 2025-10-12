@@ -40,39 +40,7 @@
 
 <!-- Contenu -->
 <div class="m-auto">
-    <img src="/assets/images/homepage.jpg"
+    <img src="/images/homepage.jpg"
         alt="Jeune femme prise en photo de dos, devant un mur de fleurs, noir et blanc, par Marianne Maric"
         class="w-full max-w-6xl h-auto rounded shadow-lg mb-8">
 </div>
-
-<!-- Sous-menus déroulants sous 'Art' -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('#main-menu .has-dropdown').forEach(item => {
-        const submenu = item.querySelector('.submenu');
-        let hideTimer;                         // <- retarde la fermeture
-
-        const show  = () => {
-            clearTimeout(hideTimer);
-            submenu.classList.remove('opacity-0','pointer-events-none');
-            submenu.classList.add   ('opacity-100');
-        };
-        const hide  = () => {
-            submenu.classList.add   ('opacity-0','pointer-events-none');
-            submenu.classList.remove('opacity-100');
-        };
-
-        item.addEventListener('mouseenter', show);
-        item.addEventListener('mouseleave', () => {
-            hideTimer = setTimeout(hide, 200); // 200 ms de tolérance
-        });
-
-        // Si la souris entre directement dans le sous‑menu
-        submenu.addEventListener('mouseenter', () => clearTimeout(hideTimer));
-        submenu.addEventListener('mouseleave', () => hideTimer = setTimeout(hide, 200));
-
-        // Clic en dehors → fermeture immédiate
-        document.addEventListener('click', e => { if (!item.contains(e.target)) hide(); });
-    });
-});
-</script>

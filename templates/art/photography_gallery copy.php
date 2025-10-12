@@ -51,6 +51,17 @@ $isPhotographyPage = preg_match('#^/?photography/#', $currentUri);
         </svg>
     </a>
 
+    <!-- Thumbnails Grid -->
+    <div class="max-w-6xl px-4 py-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <?php foreach ($photos as $index => $photo): ?>
+            <a href="#photo-<?= $index ?>" class="block">
+                <img src="/images/<?= $directory ?>/<?= basename($photo) ?>"
+                     alt="Photo <?= $index + 1 ?>"
+                     class="cursor-pointer aspect-square object-cover shadow hover:opacity-80 transition duration-200 border-2 border-transparent hover:border-red-500">
+            </a>
+        <?php endforeach; ?>
+    </div>
+
     <!-- Full Images (Scroll Anchors) -->
     <div class="max-w-6xl space-y-16 px-4 py-4">
         <?php foreach ($photos as $index => $photo): ?>

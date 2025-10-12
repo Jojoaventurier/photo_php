@@ -1,82 +1,168 @@
 <?php require_once __DIR__ . '../../../config.php'; ?>
-<div class="min-h-screen flex flex-col items-center bg-neutral-50">  
-    <div class="inline-flex max-w-[80%] items-center mb-6 mt-6">
-        <h1 class="text-4xl font-bold text-black">Marianne Marić</h1>
+<div class="min-h-screen flex flex-col items-center justify-center bg-neutral-50">  
+    <div class="lg:max-w-[80%] mx-auto mb-6 mt-6">
+        <div class="inline-flex items-center">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-black">Marianne Marić</h1>
 
-        <!-- Barre de navigation -->
-        <nav class="w-full">
-            <ul id="main-menu" class="flex justify-center gap-12 text-lg font-extralight">
-                <?php foreach ($menuItems as $item): ?>
-                    <?php 
-                        $hasChildren = !empty($item['children']); 
-                        $isActive = ($_SERVER['REQUEST_URI'] === $item['route']); 
-                    ?>
-                    <li class="relative group <?= $hasChildren ? 'has-dropdown' : '' ?>">
-                        <a href="<?= $item['route'] ?>"
-                        class="hover:underline <?= $isActive ? 'underline' : '' ?>">
-                            <?= htmlspecialchars($item['label']) ?>
-                        </a>
+            <!-- Burger Menu Button (visible on mobile/tablet) -->
+            <button id="burger-btn" class="lg:hidden flex flex-col gap-2 p-3 z-50" aria-label="Toggle menu">
+                <span class="w-8 h-0.5 bg-black transition-all duration-300"></span>
+                <span class="w-8 h-0.5 bg-black transition-all duration-300"></span>
+                <span class="w-8 h-0.5 bg-black transition-all duration-300"></span>
+            </button>
 
-                        <?php if ($hasChildren): ?>
-                            <ul class="submenu absolute left-0 mt-2 bg-white rounded shadow-md py-2 space-y-1
-                                    opacity-0 pointer-events-none transition-opacity duration-150">
-                                <?php foreach ($item['children'] as $child): ?>
-                                    <?php $isChildActive = ($_SERVER['REQUEST_URI'] === $child['route']); ?>
-                                    <li>
-                                        <a href="<?= $child['route'] ?>"
-                                        class="block px-6 hover:bg-gray-100 hover:underline <?= $isChildActive ? 'underline' : '' ?>">
-                                            <?= htmlspecialchars($child['label']) ?>
-                                        </a>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        <?php endif; ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:block w-full ml-8">
+                <ul class="flex justify-center gap-12 text-lg font-extralight">
+                    <?php foreach ($menuItems as $item): ?>
+                        <?php 
+                            $hasChildren = !empty($item['children']); 
+                            $isActive = ($_SERVER['REQUEST_URI'] === $item['route']); 
+                        ?>
+                        <li class="relative group <?= $hasChildren ? 'has-dropdown' : '' ?>">
+                            <a href="<?= $item['route'] ?>"
+                            class="hover:underline <?= $isActive ? 'underline' : '' ?>">
+                                <?= htmlspecialchars($item['label']) ?>
+                            </a>
+
+                            <?php if ($hasChildren): ?>
+                                <ul class="submenu absolute left-0 mt-2 bg-white rounded shadow-md py-2 space-y-1
+                                        opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-150">
+                                    <?php foreach ($item['children'] as $child): ?>
+                                        <?php $isChildActive = ($_SERVER['REQUEST_URI'] === $child['route']); ?>
+                                        <li>
+                                            <a href="<?= $child['route'] ?>"
+                                            class="block px-6 py-1 hover:bg-gray-100 hover:underline <?= $isChildActive ? 'underline' : '' ?>">
+                                                <?= htmlspecialchars($child['label']) ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Mobile/Tablet Navigation (Hidden by default) -->
+        <nav id="mobile-menu" class="lg:hidden fixed inset-0 bg-neutral-50 z-40 transform translate-x-full transition-transform duration-300">
+            <div class="flex flex-col items-center justify-center h-full">
+                <ul class="flex flex-col items-center gap-8 text-2xl font-extralight">
+                    <?php foreach ($menuItems as $item): ?>
+                        <?php 
+                            $hasChildren = !empty($item['children']); 
+                            $isActive = ($_SERVER['REQUEST_URI'] === $item['route']); 
+                        ?>
+                        <li class="text-center">
+                            <a href="<?= $item['route'] ?>"
+                            class="hover:underline <?= $isActive ? 'underline' : '' ?>">
+                                <?= htmlspecialchars($item['label']) ?>
+                            </a>
+
+                            <?php if ($hasChildren): ?>
+                                <ul class="mt-4 space-y-3 text-lg">
+                                    <?php foreach ($item['children'] as $child): ?>
+                                        <?php $isChildActive = ($_SERVER['REQUEST_URI'] === $child['route']); ?>
+                                        <li>
+                                            <a href="<?= $child['route'] ?>"
+                                            class="hover:underline <?= $isChildActive ? 'underline' : '' ?>">
+                                                <?= htmlspecialchars($child['label']) ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </nav>
     </div>
 
-<div class="max-w-6xl mt-12 mx-auto p-6 space-y-10">
+    <div class="w-full max-w-6xl mt-6 lg:mt-12 mx-auto px-4 sm:px-6 space-y-6 lg:space-y-10">
 
-  <!-- COVER EN HAUT -->
-  <div>
-    <img src="/assets/images/art-direction/lampgirl.jpg" alt="Cover" 
-         class="w-full max-h-[600px] object-cover rounded-2xl shadow-xl" />
-  </div>
+        <!-- COVER EN HAUT -->
+        <div>
+            <img src="/images/art-direction/lampgirl.jpg" alt="Cover" 
+                 class="w-full max-h-[400px] sm:max-h-[500px] lg:max-h-[600px] object-cover rounded-2xl shadow-xl" />
+        </div>
 
-  <!-- GALERIE MAGAZINE -->
-  <div class="grid grid-cols-6 gap-6 auto-rows-[300px]">
+        <!-- GALERIE MAGAZINE -->
+        <div class="grid grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6 auto-rows-[200px] sm:auto-rows-[250px] lg:auto-rows-[300px]">
 
-    <!-- Trois grandes images style Kool Keith -->
-    <div class="col-span-3 row-span-2">
-      <img src="/assets/images/art-direction/logistic_records_kool_keith_final_selection-1.webp" alt="Grande 1" 
-           class="w-full h-full object-cover rounded-2xl shadow-lg" />
+            <!-- Trois grandes images style Kool Keith -->
+            <div class="col-span-2 lg:col-span-3 row-span-2">
+                <img src="/images/art-direction/logistic_records_kool_keith_final_selection-1.webp" alt="Grande 1" 
+                     class="w-full h-full object-cover rounded-xl lg:rounded-2xl shadow-lg" />
+            </div>
+
+            <div class="col-span-2 lg:col-span-3 row-span-2">
+                <img src="/images/art-direction/logistic_records_kool_keith_final_selection-2.webp" alt="Grande 2" 
+                     class="w-full h-full object-cover rounded-xl lg:rounded-2xl shadow-lg" />
+            </div>
+
+            <!-- Dernière grande image pleine largeur -->
+            <div class="col-span-2 lg:col-span-6 row-span-2">
+                <img src="/images/art-direction/logistic_records_kool_keith_final_selection-3.webp" alt="Grande 3 pleine largeur" 
+                     class="w-full h-full object-cover rounded-xl lg:rounded-2xl shadow-lg" />
+            </div>
+
+            <!-- Petite photo carrée (mise en valeur) -->
+            <div class="col-span-2 lg:col-span-3 row-span-2">
+                <img src="/images/art-direction/51+EFF-BxVL-1.jpg" alt="Petit carré" 
+                     class="w-full h-full object-cover rounded-xl lg:rounded-2xl shadow-lg" />
+            </div>
+
+            <!-- Photo carrée (mise en valeur) -->
+            <div class="col-span-2 lg:col-span-3 row-span-2">
+                <img src="/images/art-direction/BOTH-WAYS-ENSEMBLE-2-ok.webp" alt="Carré" 
+                     class="w-full h-full object-cover rounded-xl lg:rounded-2xl shadow-lg" />
+            </div>
+
+        </div>
     </div>
-
-    <div class="col-span-3 row-span-2">
-      <img src="/assets/images/art-direction/logistic_records_kool_keith_final_selection-2.webp" alt="Grande 2" 
-           class="w-full h-full object-cover rounded-2xl shadow-lg" />
-    </div>
-
-    <!-- Dernière grande image pleine largeur -->
-    <div class="col-span-6 row-span-2">
-      <img src="/assets/images/art-direction/logistic_records_kool_keith_final_selection-3.webp" alt="Grande 3 pleine largeur" 
-           class="w-full h-full object-cover rounded-2xl shadow-lg" />
-    </div>
-
-    <!-- Petite photo carrée (mise en valeur) -->
-    <div class="col-span-3 row-span-2">
-      <img src="/assets/images/art-direction/51+EFF-BxVL-1.jpg" alt="Petit carré" 
-           class="w-full h-full object-cover rounded-2xl shadow-lg" />
-    </div>
-
-    <!-- Photo carrée (mise en valeur) -->
-    <div class="col-span-3 row-span-2">
-      <img src="/assets/images/art-direction/BOTH-WAYS-ENSEMBLE-2-ok.webp" alt="Carré" 
-           class="w-full h-full object-cover rounded-2xl shadow-lg" />
-    </div>
-
-  </div>
 </div>
-</div>
+
+<script>
+// Burger menu functionality
+const burgerBtn = document.getElementById('burger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const burgerLines = burgerBtn.querySelectorAll('span');
+
+burgerBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('translate-x-0');
+    
+    if (isOpen) {
+        // Close menu
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenu.classList.add('translate-x-full');
+        
+        // Reset burger lines
+        burgerLines[0].classList.remove('rotate-45', 'translate-y-2');
+        burgerLines[1].classList.remove('opacity-0');
+        burgerLines[2].classList.remove('-rotate-45', '-translate-y-2');
+    } else {
+        // Open menu
+        mobileMenu.classList.remove('translate-x-full');
+        mobileMenu.classList.add('translate-x-0');
+        
+        // Animate burger to X
+        burgerLines[0].classList.add('rotate-45', 'translate-y-2');
+        burgerLines[1].classList.add('opacity-0');
+        burgerLines[2].classList.add('-rotate-45', '-translate-y-2');
+    }
+});
+
+// Close menu when clicking on a link
+const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenu.classList.add('translate-x-full');
+        burgerLines[0].classList.remove('rotate-45', 'translate-y-2');
+        burgerLines[1].classList.remove('opacity-0');
+        burgerLines[2].classList.remove('-rotate-45', '-translate-y-2');
+    });
+});
+</script>

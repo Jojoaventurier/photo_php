@@ -5,36 +5,36 @@
 
         <!-- Barre de navigation -->
         <nav class="w-full">
-            <ul id="main-menu" class="flex justify-center gap-12 text-lg font-extralight">
-                <?php foreach ($menuItems as $item): ?>
-                    <?php 
-                        $hasChildren = !empty($item['children']); 
-                        $isActive = ($_SERVER['REQUEST_URI'] === $item['route']); 
-                    ?>
-                    <li class="relative group <?= $hasChildren ? 'has-dropdown' : '' ?>">
-                        <a href="<?= $item['route'] ?>"
+          <ul id="main-menu" class="flex justify-center gap-12 text-lg font-extralight">
+              <?php foreach ($menuItems as $item): ?>
+                  <?php 
+                      $hasChildren = !empty($item['children']); 
+                      $isActive = ($_SERVER['REQUEST_URI'] === $item['route']); 
+                  ?>
+                  <li class="relative group <?= $hasChildren ? 'has-dropdown' : '' ?>">
+                      <a href="<?= $item['route'] ?>"
                         class="hover:underline <?= $isActive ? 'underline' : '' ?>">
-                            <?= htmlspecialchars($item['label']) ?>
-                        </a>
+                          <?= htmlspecialchars($item['label']) ?>
+                      </a>
 
-                        <?php if ($hasChildren): ?>
-                            <ul class="submenu absolute left-0 mt-2 bg-white rounded shadow-md py-2 space-y-1
-                                    opacity-0 pointer-events-none transition-opacity duration-150">
-                                <?php foreach ($item['children'] as $child): ?>
-                                    <?php $isChildActive = ($_SERVER['REQUEST_URI'] === $child['route']); ?>
-                                    <li>
-                                        <a href="<?= $child['route'] ?>"
+                      <?php if ($hasChildren): ?>
+                          <ul class="submenu absolute left-0 mt-2 bg-white rounded shadow-md py-2 space-y-1
+                                  opacity-0 pointer-events-none transition-opacity duration-150">
+                              <?php foreach ($item['children'] as $child): ?>
+                                  <?php $isChildActive = ($_SERVER['REQUEST_URI'] === $child['route']); ?>
+                                  <li>
+                                      <a href="<?= $child['route'] ?>"
                                         class="block px-6 hover:bg-gray-100 hover:underline <?= $isChildActive ? 'underline' : '' ?>">
-                                            <?= htmlspecialchars($child['label']) ?>
-                                        </a>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        <?php endif; ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </nav>
+                                          <?= htmlspecialchars($child['label']) ?>
+                                      </a>
+                                  </li>
+                              <?php endforeach; ?>
+                          </ul>
+                      <?php endif; ?>
+                  </li>
+              <?php endforeach; ?>
+          </ul>
+      </nav>
     </div>
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-8 max-w-5xl mx-auto px-4">

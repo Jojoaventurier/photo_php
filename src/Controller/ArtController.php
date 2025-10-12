@@ -9,7 +9,7 @@ class ArtController
     private function getMenu(): array
     {
         return [
-            ['label' => 'Home', 'route' => '/'],
+            ['label' => 'Home', 'route' => '/home'],
             ['label' => 'Photography', 'route' => '/photography'],
             ['label' => 'Art Direction', 'route' => '/art-direction'],
             ['label' => 'Exhibitions & Books', 'route' => '/exhibitions-books'],
@@ -64,18 +64,18 @@ class ArtController
 
     /* --------  UTILITAIRE  -------- */
     /**
-     * Load images from a folder under /assets/images/{folder}
+     * Load images from a folder under /images/{folder}
      *
      * @param string $folder
      * @return string[] Array of public URLs
      */
     private function loadGallery(string $folder): array
     {
-        $dir = __DIR__ . '/../../public/assets/images/' . $folder;
+        $dir = __DIR__ . '/../../public/images/' . $folder;
         $files = glob($dir . '/*.{jpg,jpeg,png,webp,gif}', GLOB_BRACE);
 
         return array_map(
-            fn(string $f) => '/assets/images/' . $folder . '/' . basename($f),
+            fn(string $f) => '/public/images/' . $folder . '/' . basename($f),
             $files ?: []
         );
     }

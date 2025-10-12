@@ -9,7 +9,7 @@ class ArtDirectionController
 private function getMenu(): array
 {
     return [
-        ['label' => 'Home', 'route' => '/'],
+        ['label' => 'Home', 'route' => '/home'],
         ['label' => 'Photography', 'route' => '/photography'],
         ['label' => 'Art Direction', 'route' => '/art-direction'],
         ['label' => 'Exhibitions & Books', 'route' => '/exhibitions-books'],

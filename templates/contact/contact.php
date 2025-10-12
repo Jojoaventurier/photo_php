@@ -39,7 +39,7 @@
 
 <section class="mt-20 text-center">
       <div class="m-auto">
-        <img src="/assets/images/contact.jpg"
+        <img src="/images/contact.jpg"
             alt="Jeune femme dans une cabane sur une montagne, par Marianne Maric"
             class="w-full max-w-6xl h-auto rounded shadow-lg mb-8">
     </div>
