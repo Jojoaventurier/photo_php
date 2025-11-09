@@ -1,40 +1,85 @@
 <?php require_once __DIR__ . '../../../config.php'; ?>
 <div class="min-h-screen flex flex-col items-center bg-neutral-50">  
-    <div class="inline-flex max-w-[80%] items-center mb-6 mt-6">
-        <h1 class="text-4xl font-bold text-black">Marianne Marić</h1>
 
-        <!-- Barre de navigation -->
-        <nav class="w-full">
-          <ul id="main-menu" class="flex justify-center gap-12 text-lg font-extralight">
-              <?php foreach ($menuItems as $item): ?>
-                  <?php 
-                      $hasChildren = !empty($item['children']); 
-                      $isActive = ($_SERVER['REQUEST_URI'] === $item['route']); 
-                  ?>
-                  <li class="relative group <?= $hasChildren ? 'has-dropdown' : '' ?>">
-                      <a href="<?= $item['route'] ?>"
-                        class="hover:underline <?= $isActive ? 'underline' : '' ?>">
-                          <?= htmlspecialchars($item['label']) ?>
-                      </a>
+    <!-- Header + Navigation -->
+    <div class="lg:max-w-[80%] mx-auto mb-6 mt-6 px-4 sm:px-6">
+        <div class="inline-flex items-center">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-black">Marianne Marić</h1>
 
-                      <?php if ($hasChildren): ?>
-                          <ul class="submenu absolute left-0 mt-2 bg-white rounded shadow-md py-2 space-y-1
-                                  opacity-0 pointer-events-none transition-opacity duration-150">
-                              <?php foreach ($item['children'] as $child): ?>
-                                  <?php $isChildActive = ($_SERVER['REQUEST_URI'] === $child['route']); ?>
-                                  <li>
-                                      <a href="<?= $child['route'] ?>"
-                                        class="block px-6 hover:bg-gray-100 hover:underline <?= $isChildActive ? 'underline' : '' ?>">
-                                          <?= htmlspecialchars($child['label']) ?>
-                                      </a>
-                                  </li>
-                              <?php endforeach; ?>
-                          </ul>
-                      <?php endif; ?>
-                  </li>
-              <?php endforeach; ?>
-          </ul>
-      </nav>
+            <!-- Burger Menu Button (visible on mobile/tablet) -->
+            <button id="burger-btn" class="lg:hidden flex flex-col gap-2.5 p-4 z-50" aria-label="Toggle menu">
+                <span class="w-10 h-0.5 bg-black transition-all duration-300"></span>
+                <span class="w-10 h-0.5 bg-black transition-all duration-300"></span>
+                <span class="w-10 h-0.5 bg-black transition-all duration-300"></span>
+            </button>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:block w-full ml-8">
+                <ul class="flex justify-center gap-12 text-lg font-extralight">
+                    <?php foreach ($menuItems as $item): ?>
+                        <?php 
+                            $hasChildren = !empty($item['children']); 
+                            $isActive = ($_SERVER['REQUEST_URI'] === $item['route']); 
+                        ?>
+                        <li class="relative group <?= $hasChildren ? 'has-dropdown' : '' ?>">
+                            <a href="<?= $item['route'] ?>"
+                            class="hover:underline <?= $isActive ? 'underline' : '' ?>">
+                                <?= htmlspecialchars($item['label']) ?>
+                            </a>
+
+                            <?php if ($hasChildren): ?>
+                                <ul class="submenu absolute left-0 mt-2 bg-white rounded shadow-md py-2 space-y-1
+                                        opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-150">
+                                    <?php foreach ($item['children'] as $child): ?>
+                                        <?php $isChildActive = ($_SERVER['REQUEST_URI'] === $child['route']); ?>
+                                        <li>
+                                            <a href="<?= $child['route'] ?>"
+                                            class="block px-6 py-1 hover:bg-gray-100 hover:underline <?= $isChildActive ? 'underline' : '' ?>">
+                                                <?= htmlspecialchars($child['label']) ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Mobile/Tablet Navigation (Hidden by default) -->
+        <nav id="mobile-menu" class="lg:hidden fixed inset-0 bg-neutral-50 z-40 transform translate-x-full transition-transform duration-300">
+            <div class="flex flex-col items-center justify-center h-full">
+                <ul class="flex flex-col items-center gap-10 text-3xl font-extralight">
+                    <?php foreach ($menuItems as $item): ?>
+                        <?php 
+                            $hasChildren = !empty($item['children']); 
+                            $isActive = ($_SERVER['REQUEST_URI'] === $item['route']); 
+                        ?>
+                        <li class="text-center">
+                            <a href="<?= $item['route'] ?>"
+                            class="hover:underline <?= $isActive ? 'underline' : '' ?>">
+                                <?= htmlspecialchars($item['label']) ?>
+                            </a>
+
+                            <?php if ($hasChildren): ?>
+                                <ul class="mt-6 space-y-4 text-xl">
+                                    <?php foreach ($item['children'] as $child): ?>
+                                        <?php $isChildActive = ($_SERVER['REQUEST_URI'] === $child['route']); ?>
+                                        <li>
+                                            <a href="<?= $child['route'] ?>"
+                                            class="hover:underline <?= $isChildActive ? 'underline' : '' ?>">
+                                                <?= htmlspecialchars($child['label']) ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </nav>
     </div>
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-8 max-w-5xl mx-auto px-4">
@@ -50,7 +95,7 @@
 <p class="text-justify font-light">
     Marianne Marić (born 1982) is a photographer.
     <br><br>
-    Her practice in analog photography does not exclude projects in sculpture, choreography, and video, and has inspired numerous collaborations. Her photographic journey is enriched by the communities she engages with, capturing the ways they embody themselves. Born in Alsace in 1982, she trained at the École Nationale Supérieure d’Art et de Design in Nancy, then at the National College of Art and Design in Dublin, where she earned a Master’s degree in 2009. She honed her technique by assisting numerous photographers, both documentary and fashion, and perfected her printing skills at the legendary Parisian lab Imaginoir, all while continuing to study painting, particularly the works of Jean-Jacques Henner (1829–1905).
+    Her practice in analog photography does not exclude projects in sculpture, choreography, and video, and has inspired numerous collaborations. Her photographic journey is enriched by the communities she engages with, capturing the ways they embody themselves. Born in Alsace in 1982, she trained at the École Nationale Supérieure d'Art et de Design in Nancy, then at the National College of Art and Design in Dublin, where she earned a Master's degree in 2009. She honed her technique by assisting numerous photographers, both documentary and fashion, and perfected her printing skills at the legendary Parisian lab Imaginoir, all while continuing to study painting, particularly the works of Jean-Jacques Henner (1829–1905).
     <br><br>
     Her photography was recently featured on the poster for the exhibition <em>La République Cynique</em> at Palais de Tokyo (November 2024), and several projects are forthcoming, including a continuation of her long-term collaboration with Pierre Bal-Blanc (since 2009) and a photographic residency in Albania in spring 2025. Last year, she served as a mentor for teaching Image at École Duperré and continues to teach intermittently (Beaux-Arts of Athens). Her art flirts with wide-ranging practices: socially engaged performances alongside utilitarian ceramics, with no boundaries. Above all, she values the joy of creation and exchange with her peers, notably Mireille Blanc, with whom she has shared a passion for painting since 2007.
 </p>
@@ -58,8 +103,8 @@
     </div>
 </div>
 
-<section class="max-w-6xl mx-auto px-4 my-12 grid grid-cols-1 md:grid-cols-2 gap-12">
-  <!-- Exhibitions (left column) -->
+<section class="max-w-6xl mx-auto px-4 my-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
+  <!-- Exhibitions (left column on desktop, first on mobile) -->
   <div>
     <h2 class="text-2xl font-light mb-8 text-center">Expositions</h2>
     <div class="relative border-l border-gray-300">
@@ -97,18 +142,18 @@
       </div>
       <div class="mb-8 ml-6">
         <div class="absolute w-3 h-3 bg-black rounded-full -left-1.5 mt-1"></div>
-        <h3 class="">Biennale d’Athènes – Athènes</h3>
+        <h3 class="">Biennale d'Athènes – Athènes</h3>
         <p class="text-sm text-gray-600">2018</p>
       </div>
       <div class="mb-8 ml-6">
         <div class="absolute w-3 h-3 bg-black rounded-full -left-1.5 mt-1"></div>
-        <h3 class="">Filles de l’Est – La Filature, Mulhouse</h3>
+        <h3 class="">Filles de l'Est – La Filature, Mulhouse</h3>
         <p class="text-sm text-gray-600">2017</p>
       </div>
     </div>
   </div>
 
-  <!-- PDFs Section (right column) -->
+  <!-- PDFs Section (right column on desktop, second on mobile) -->
 <div>
         <h2 class="text-2xl font-light mb-8 text-center">Publications</h2>
         <div class="grid grid-cols-1 gap-6">
@@ -170,3 +215,46 @@
   </div>
 </section>
 </div>
+
+<script>
+// Burger menu functionality
+const burgerBtn = document.getElementById('burger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const burgerLines = burgerBtn.querySelectorAll('span');
+
+burgerBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('translate-x-0');
+    
+    if (isOpen) {
+        // Close menu
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenu.classList.add('translate-x-full');
+        
+        // Reset burger lines
+        burgerLines[0].classList.remove('rotate-45', 'translate-y-2.5');
+        burgerLines[1].classList.remove('opacity-0');
+        burgerLines[2].classList.remove('-rotate-45', '-translate-y-2.5');
+    } else {
+        // Open menu
+        mobileMenu.classList.remove('translate-x-full');
+        mobileMenu.classList.add('translate-x-0');
+        
+        // Animate burger to X
+        burgerLines[0].classList.add('rotate-45', 'translate-y-2.5');
+        burgerLines[1].classList.add('opacity-0');
+        burgerLines[2].classList.add('-rotate-45', '-translate-y-2.5');
+    }
+});
+
+// Close menu when clicking on a link
+const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenu.classList.add('translate-x-full');
+        burgerLines[0].classList.remove('rotate-45', 'translate-y-2.5');
+        burgerLines[1].classList.remove('opacity-0');
+        burgerLines[2].classList.remove('-rotate-45', '-translate-y-2.5');
+    });
+});
+</script>
