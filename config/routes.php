@@ -1,13 +1,8 @@
 <?php
-require_once __DIR__ . '/../config.php'; 
 
 return [
-    // Homepage
+    // Homepage (/home is 301-redirected to / in public/.htaccess)
     '/' => [
-        'controller' => App\Controller\HomeController::class,
-        'method' => 'index',
-    ],
-    '/home' => [
         'controller' => App\Controller\HomeController::class,
         'method' => 'index',
     ],
@@ -21,7 +16,6 @@ return [
         'method' => 'showPhotographyGallery',
     ],
 
-    // Art Direction controller (if different from ArtController)
     '/art-direction' => [
         'controller' => App\Controller\ArtDirectionController::class,
         'method' => 'index',

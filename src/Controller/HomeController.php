@@ -9,22 +9,8 @@ class HomeController
     public function index(): string
     {
         return View::render('home', [
-            'title' => 'Marianne Marić',
-            'menuItems' => $this->getMenu(),
+            'title'   => 'Marianne Marić – Photographer',
+            'ogImage' => '/images/homepage.jpg',
         ]);
-    }
-
-    /**
-     * Build the navigation menu
-     */
-    private function getMenu(): array
-    {
-        return [
-            ['label' => 'Home', 'route' => '/home'], // ✅ use "/" for homepage
-            ['label' => 'Photography', 'route' => '/photography'],
-            ['label' => 'Art Direction', 'route' => '/art-direction'],
-            ['label' => 'Exhibitions & Books', 'route' => '/exhibitions-books'],
-            ['label' => 'Contact', 'route' => '/contact'],
-        ];
     }
 }

@@ -5,23 +5,10 @@ use App\Template\View;
 
 class ArtDirectionController
 {
-    /* --------  MENU COMMUN  -------- */
-private function getMenu(): array
-{
-    return [
-        ['label' => 'Home', 'route' => '/home'],
-        ['label' => 'Photography', 'route' => '/photography'],
-        ['label' => 'Art Direction', 'route' => '/art-direction'],
-        ['label' => 'Exhibitions & Books', 'route' => '/exhibitions-books'],
-        ['label' => 'Contact', 'route' => '/contact'],
-    ];
-}
-
     public function index(): string
     {
         return View::render('art-direction/index', [
-            'title' => 'Art Direction - Marianne Marić',
-            'menuItems' => $this->getMenu(),
+            'title' => 'Art Direction – Marianne Marić',
         ]);
     }
 }

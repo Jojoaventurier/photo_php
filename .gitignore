@@ -1,1 +1,6 @@
 /vendor/
+/node_modules/
+
+# Local credentials / environment files: never commit or upload
+env.local
+.env*

@@ -5,10 +5,6 @@
 
 
 h1 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond', Garamond, 'Times New Roman', serif;
     letter-spacing: 0.02em;
-}
-
-.hidden {
-    display: hidden;
 }
